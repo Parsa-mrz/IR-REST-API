@@ -13,7 +13,7 @@ switch($request_method){
         $city_service = new CityService();
         $province_id = $_GET['province_id']?? null;
         $request_data = [
-            'province_id' => intval($province_id)
+            'province_id' => $province_id
         ];
         $response = $city_service->getCities($request_data);
         Response::responseAndDie($response,Response::HTTP_OK);

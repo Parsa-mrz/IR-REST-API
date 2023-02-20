@@ -23,7 +23,7 @@ function getCities($data = null){
     global $pdo;
     $province_id = $data['province_id'] ?? null;
     $where = '';
-    if(!is_null($province_id) and is_int($province_id)){
+    if(!is_null($province_id)){
         $where = "where province_id = {$province_id} ";
     }
     $sql = "select * from city $where";
