@@ -15,7 +15,7 @@ switch($request_method){
         $city_service = new CityService();
         $province_id = $_GET['province_id']?? null;
         // validate province id (has somw bug need to fix)
-        if(!ProvinceValidator::provinceIsvalid($province_id)){
+        if(ProvinceValidator::provinceIsvalid($province_id)){
              Response::responseAndDie('Province Not Found',Response::HTTP_NOT_FOUND);
          }
         $request_data = [
@@ -26,10 +26,15 @@ switch($request_method){
 
         break; 
     case 'POST':
-        Response::responseAndDie('POST Request Method',Response::HTTP_OK);
-        
+        if(!isValidProvince($data)){
+            Response::responseAndDie('Invalid city data',Response::HTTP_NOT_ACCEPTABLE);
+        }
+        $city_service = new CityService();
+        $response = $city_service->createCity($request_body);
+        Response::responseAndDie($response,Response::HTTP_CREATED);
         break;
     case 'PUT':
+
         Response::responseAndDie('PUT Request Method',Response::HTTP_OK);
 
         break;
