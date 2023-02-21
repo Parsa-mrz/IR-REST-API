@@ -16,7 +16,8 @@ switch($request_method){
         $request_data = [
             'province_id' => $province_id,
             'page' => $_GET['page'] ?? null,
-            'pagesize' => $_GET['pagesize'] ?? null
+            'pagesize' => $_GET['pagesize'] ?? null,
+            'fields' => $_GET['fields'] ?? null
         ];
         $response = $city_service->getCities($request_data);
         // validate province id

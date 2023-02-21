@@ -24,6 +24,7 @@ function getCities($data = null){
     $province_id = $data['province_id'] ?? null;
     $page = $data['page'] ?? null;
     $pagesize = $data['pagesize'] ?? null;
+    $fields = $data['fields'] ?? '*';
     $limit = '';
     if(is_numeric($page) and is_numeric($pagesize)){
         // $start is page in limit query 
@@ -35,7 +36,7 @@ function getCities($data = null){
     if(!is_null($province_id)){
         $where = "where province_id = {$province_id} ";
     }
-    $sql = "select * from city $where $limit";
+    $sql = "select $fields from city $where $limit";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $records = $stmt->fetchAll(PDO::FETCH_OBJ);
