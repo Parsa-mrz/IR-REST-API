@@ -13,17 +13,18 @@ $city_service = new CityService();
 switch($request_method){
     case 'GET':
         $province_id = $_GET['province_id']?? null;
-        // validate province id
-        if(ProvinceValidator::provinceIsvalid($province_id)){
-             Response::responseAndDie('Province Not Found',Response::HTTP_NOT_FOUND);
-         }
         $request_data = [
             'province_id' => $province_id
         ];
         $response = $city_service->getCities($request_data);
+        // validate province id
+        if(empty($response)){
+            Response::responseAndDie('Invalid Province Data',Response::HTTP_NOT_FOUND);
+        }
         Response::responseAndDie($response,Response::HTTP_OK);
 
         break; 
+
     case 'POST':
         if(!isValidCity($request_body)){
             Response::responseAndDie('Invalid city data',Response::HTTP_NOT_ACCEPTABLE);
@@ -31,11 +32,14 @@ switch($request_method){
         $response = $city_service->createCity($request_body);
         Response::responseAndDie($response,Response::HTTP_CREATED);
         break;
-    case 'PUT':
 
-        Response::responseAndDie('PUT Request Method',Response::HTTP_OK);
+    case 'PUT':
+        [$city_id,$city_name] = [$request_body['city_id'],$request_body['name']];
+        $response = $city_service->updateCityName($city_id,$city_name);
+        Response::responseAndDie($response,Response::HTTP_OK);
 
         break;
+
     case 'DELETE':
         Response::responseAndDie('DELETE Request Method',Response::HTTP_OK);
         
