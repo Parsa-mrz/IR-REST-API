@@ -47,7 +47,15 @@ switch($request_method){
         break;
 
     case 'DELETE':
-        Response::responseAndDie('DELETE Request Method',Response::HTTP_OK);
+        $city_id = $_GET['city_id'] ?? null;
+        if(!is_numeric($city_id) or is_null($city_id)){
+            Response::responseAndDie('Invalid City Data',Response::HTTP_NOT_ACCEPTABLE);
+        }
+        $response = $city_service->deleteCityName($city_id);
+        if(empty($response)){
+            Response::responseAndDie('Invalid City Data',Response::HTTP_NOT_FOUND);
+        }
+        Response::responseAndDie($response,Response::HTTP_OK);
         
         break;
     
