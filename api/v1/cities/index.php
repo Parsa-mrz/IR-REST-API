@@ -15,9 +15,9 @@ switch($request_method){
         $city_service = new CityService();
         $province_id = $_GET['province_id']?? null;
         // validate province id (has somw bug need to fix)
-        //! if(!ProvinceValidator::provinceIsvalid($province_id)){
-        //!     Response::responseAndDie('Province Not Found',Response::HTTP_NOT_FOUND);
-        //! }
+        if(!ProvinceValidator::provinceIsvalid($province_id)){
+             Response::responseAndDie('Province Not Found',Response::HTTP_NOT_FOUND);
+         }
         $request_data = [
             'province_id' => $province_id
         ];
