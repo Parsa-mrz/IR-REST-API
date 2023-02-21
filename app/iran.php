@@ -36,6 +36,11 @@ function getCities($data = null){
     if(!is_null($province_id)){
         $where = "where province_id = {$province_id} ";
     }
+    // validate fields query 
+    $acceptable_fields = ['id','name','province_id'];
+    if(!in_array($fields,$acceptable_fields)){
+        return "fields is not correct";
+    }
     $sql = "select $fields from city $where $limit";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
