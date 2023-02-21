@@ -13,4 +13,9 @@ class CityService{
         $result = addCity($data);
         return $result;
     }
+
+    public function updateCityName($city_id,$name){
+        $result = changeCityName($city_id,$name);
+        return $result;
+    }
 }

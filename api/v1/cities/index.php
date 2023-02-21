@@ -35,7 +35,13 @@ switch($request_method){
 
     case 'PUT':
         [$city_id,$city_name] = [$request_body['city_id'],$request_body['name']];
+        if(!is_numeric($city_id) or empty($city_name)){
+            Response::responseAndDie('Invalid City Data',Response::HTTP_NOT_ACCEPTABLE);
+        }
         $response = $city_service->updateCityName($city_id,$city_name);
+        if(empty($response)){
+            Response::responseAndDie('No Record Updated',Response::HTTP_NOT_FOUND);
+        }
         Response::responseAndDie($response,Response::HTTP_OK);
 
         break;
