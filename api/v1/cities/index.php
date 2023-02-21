@@ -7,14 +7,13 @@ use App\Utilities\Response;
 
 
 $request_method = $_SERVER['REQUEST_METHOD'];
-
 $request_body = json_decode(file_get_contents('php://input'),true);
+$city_service = new CityService();
 
 switch($request_method){
     case 'GET':
-        $city_service = new CityService();
         $province_id = $_GET['province_id']?? null;
-        // validate province id (has somw bug need to fix)
+        // validate province id
         if(ProvinceValidator::provinceIsvalid($province_id)){
              Response::responseAndDie('Province Not Found',Response::HTTP_NOT_FOUND);
          }
@@ -26,10 +25,9 @@ switch($request_method){
 
         break; 
     case 'POST':
-        if(!isValidProvince($data)){
+        if(!isValidCity($request_body)){
             Response::responseAndDie('Invalid city data',Response::HTTP_NOT_ACCEPTABLE);
         }
-        $city_service = new CityService();
         $response = $city_service->createCity($request_body);
         Response::responseAndDie($response,Response::HTTP_CREATED);
         break;
