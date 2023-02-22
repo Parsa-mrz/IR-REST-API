@@ -42,7 +42,7 @@ function getCities($data = null){
         $where = "where province_id = {$province_id} ";
     }
     // validate fields query 
-    $acceptable_fields = ['id','name','province_id'];
+    $acceptable_fields = ['id','name','province_id','*'];
     if(!in_array($fields,$acceptable_fields)){
         return "fields is not correct";
     }
