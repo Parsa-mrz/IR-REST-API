@@ -5,16 +5,13 @@ use App\Services\CityService;
 use App\Utilities\Response;
 use App\Utilities\CacheUtilities;
 
-CacheUtilities::start();
-echo 'test cache' . rand(1,500);
-CacheUtilities::end();
-
 $request_method = $_SERVER['REQUEST_METHOD'];
 $request_body = json_decode(file_get_contents('php://input'),true);
 $city_service = new CityService();
 
 switch($request_method){ 
     case 'GET':
+        CacheUtilities::start();
         $province_id = $_GET['province_id']?? null;
         $request_data = [
             'province_id' => $province_id,
@@ -28,7 +25,8 @@ switch($request_method){
         if(empty($response)){
             Response::responseAndDie('Invalid Province Data',Response::HTTP_NOT_FOUND);
         }
-        Response::responseAndDie($response,Response::HTTP_OK);
+        echo Response::respond($response,Response::HTTP_OK);
+        CacheUtilities::end();
 
         break; 
 
