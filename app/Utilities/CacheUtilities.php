@@ -2,10 +2,10 @@
 namespace App\Utilities;
 use \App\Utilities\Response;
 
-class CacheUtility
+class CacheUtilities
 {
     protected static $cache_file;
-    protected static $cache_enabled = 1;
+    protected static $cache_enabled = CACHE_ENABLE;
     const EXPIRE_TIME = 3600;   // 1 hour
 
     public static function init()
