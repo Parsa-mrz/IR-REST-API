@@ -25,6 +25,11 @@ function getCities($data = null){
     $page = $data['page'] ?? null;
     $pagesize = $data['pagesize'] ?? null;
     $fields = $data['fields'] ?? '*';
+    $orderby = $data['orderby'] ?? null;
+    $orderbyStr = '';
+    if(!is_null($orderby)){
+        $orderbyStr = "ORDER BY $orderby";
+    }
     $limit = '';
     if(is_numeric($page) and is_numeric($pagesize)){
         // $start is page in limit query 
@@ -41,7 +46,7 @@ function getCities($data = null){
     if(!in_array($fields,$acceptable_fields)){
         return "fields is not correct";
     }
-    $sql = "select $fields from city $where $limit";
+    $sql = "select $fields from city $where $orderbyStr $limit";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $records = $stmt->fetchAll(PDO::FETCH_OBJ);
