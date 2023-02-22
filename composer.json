@@ -1,0 +1,17 @@
+{
+    "name": "parsa/api",
+    "require": {
+        "firebase/php-jwt": "^6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Parsa\\Api\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Parsa Mirzaie",
+            "email": "Mirzaie_parsa@protonmail.ch"
+        }
+    ]
+}
