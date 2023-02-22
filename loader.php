@@ -1,6 +1,7 @@
 <?php 
 
 define('CACHE_DIR',__DIR__.'/cache');
+define('CACHE_ENABLE',1);
 
 include_once('App/iran.php');
 
@@ -11,8 +12,3 @@ spl_autoload_register(function ($class){
     }
     include_once $class_file;
 });
-
-
-// use App\Services\CityService;
-// use App\Utilities\Response;
-//  new CityService();
