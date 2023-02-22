@@ -1,8 +1,14 @@
 <?php 
 
+// cache constants 
 define('CACHE_DIR',__DIR__.'/cache');
-define('CACHE_ENABLE',1);
+define('CACHE_ENABLE',0);
 
+// authorization constant 
+define("JWT_ALG","HS256");
+define('JWT_KEY','parsaIranApiKey8489df%$^&YG89ywe89');
+
+include("vendor/autoload.php");
 include_once('App/iran.php');
 
 spl_autoload_register(function ($class){

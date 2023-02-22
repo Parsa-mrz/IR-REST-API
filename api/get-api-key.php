@@ -16,6 +16,6 @@ if(is_null($user)){
     die('User Not Exist!!');
 }
 $jwt = createApiToken($user);
-echo "jwt token for $user->name : <br><textarea style='width:100%'>$jwt</textarea>"
+echo "jwt token for $user->name : <br><textarea style='width:100%'> $jwt </textarea>"
 ?>
 </div>

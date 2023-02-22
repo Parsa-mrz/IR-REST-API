@@ -5,6 +5,13 @@ use App\Services\CityService;
 use App\Utilities\Response;
 use App\Utilities\CacheUtilities;
 
+// Check authorization(JWT)
+$token = getAuthorizationHeader();
+$user = isValidToken($token);
+if(!$user){
+    Response::responseAndDie('Invalid API Token',Response::HTTP_UNAUTHORIZED);
+}
+
 $request_method = $_SERVER['REQUEST_METHOD'];
 $request_body = json_decode(file_get_contents('php://input'),true);
 $city_service = new CityService();
