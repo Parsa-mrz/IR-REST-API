@@ -1,14 +1,13 @@
 <?php 
 include_once("../../../loader.php");
-
+include_once("../../../App/Utilities/CacheUtilities.php");
 use App\Services\CityService;
-use App\Services\ProvinceValidator;
 use App\Utilities\Response;
-use App\Utilities\CacheUtility;
+use App\Utilities\CacheUtilities;
 
-CacheUtility::start();
-echo('test cache');
-CacheUtility::end();
+CacheUtilities::start();
+echo 'test cache' . rand(1,500);
+CacheUtilities::end();
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 $request_body = json_decode(file_get_contents('php://input'),true);
