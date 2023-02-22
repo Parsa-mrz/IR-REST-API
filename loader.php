@@ -1,5 +1,7 @@
 <?php 
 
+define('CACHE_DIR',__DIR__.'/cache');
+
 include_once('App/iran.php');
 
 spl_autoload_register(function ($class){

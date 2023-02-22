@@ -4,7 +4,11 @@ include_once("../../../loader.php");
 use App\Services\CityService;
 use App\Services\ProvinceValidator;
 use App\Utilities\Response;
+use App\Utilities\CacheUtility;
 
+CacheUtility::start();
+echo('test cache');
+CacheUtility::end();
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 $request_body = json_decode(file_get_contents('php://input'),true);
