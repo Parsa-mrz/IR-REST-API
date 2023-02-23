@@ -122,7 +122,7 @@ function deleteProvince($province_id){
 #================  Auth Operations  =================
 # its our user database 😀
 $users = [
-    (object)['id'=>1,'name'=>'parsa','email'=>'parsa@gmail.com','role' => 'admin','allowed_provinces' => []],
+    (object)['id'=>1,'name'=>'parsa','email'=>'parsa@gmail.com','role' => 'admin','allowed_provinces' => [2]],
     (object)['id'=>2,'name'=>'michael','email'=>'michael@gmail.com','role' => 'Governor','allowed_provinces' => [7,8,9]],
     (object)['id'=>3,'name'=>'alex','email'=>'alex@gmail.com','role' => 'mayor','allowed_provinces' => [3]],
     (object)['id'=>4,'name'=>'simon','email'=>'simon@gmail.com','role' => 'president','allowed_provinces' => []]
@@ -158,8 +158,9 @@ function isValidToken($jwt_token){
 }
 
 function hasAccessToProvince($user,$province_id){
-    return (in_array($user->role,['admin','president']) or 
-            in_array($province_id,$user->allowed_provinces));
+    return(in_array($province_id,$user->allowed_provinces) or
+     in_array($user->role,['admin','president']));
+
 }
 /** 
  * Get header Authorization

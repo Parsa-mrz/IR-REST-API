@@ -21,8 +21,11 @@ $city_service = new CityService();
 
 switch($request_method){ 
     case 'GET':
-        CacheUtilities::start();
         $province_id = $_GET['province_id']?? null;
+        if(!hasAccessToProvince($user,$province_id)){
+            Response::responseAndDie('You have no access to this province',Response::HTTP_FORBIDDEN);
+        }
+        CacheUtilities::start();
         $request_data = [
             'province_id' => $province_id,
             'page' => $_GET['page'] ?? null,
