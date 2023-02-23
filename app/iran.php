@@ -1,5 +1,6 @@
 <?php
 use \Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 try {
     $pdo = new PDO("mysql:dbname=Iran;host=localhost", 'root', 'root');
     $pdo->exec("set names utf8;");
@@ -148,7 +149,7 @@ function createApiToken($user){
 
 function isValidToken($jwt_token){
     try{
-        $payload = JWT::decode($jwt_token,JWT_KEY,array(JWT_ALG));
+        $payload = JWT::decode($jwt_token,new Key(JWT_KEY,JWT_ALG));
         $user = getUserById($payload->user_id);
         return $user;
     }catch(Exception $e){
