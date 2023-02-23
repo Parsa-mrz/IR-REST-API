@@ -7,8 +7,11 @@ use App\Utilities\CacheUtilities;
 
 // Check authorization(JWT)
 $token = getBearerToken();
+if($token == null){
+    Response::responseAndDie('Invalid API Token',Response::HTTP_UNAUTHORIZED);
+}
 $user = isValidToken($token);
-if(!$user){
+if(!$user or $token == null){
     Response::responseAndDie('Invalid API Token',Response::HTTP_UNAUTHORIZED);
 }
 
