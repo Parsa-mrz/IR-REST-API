@@ -6,6 +6,7 @@ use App\Utilities\Response;
 use App\Utilities\CacheUtilities;
 
 // Check authorization(JWT)
+// header schema >>> Authorization: Bearer <token>
 $token = getBearerToken();
 if($token == null){
     Response::responseAndDie('Invalid API Token',Response::HTTP_UNAUTHORIZED);
